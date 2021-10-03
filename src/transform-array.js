@@ -13,7 +13,43 @@ import { NotImplementedError } from '../extensions/index.js';
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-export default function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+
+function NoArrayException(message) {
+    this.message = message;
+    this.name = "NoArrayException";
+}
+
+export default function transform(arr) {
+    if (!Array.isArray(arr)) {
+        throw new NoArrayException("\'arr\' parameter must be an instance of the Array!")
+    }
+    let mas = [...arr]
+    for (let i = 0; i < mas.length; i++) {
+        switch (mas[i]) {
+            case "--discard-next":
+                mas[i] = null;
+                mas[i + 1] = null;
+                break;
+            case "--discard-prev":
+                mas[i] = null;
+                mas[i - 1] = null;
+                break;
+            case "--double-next":
+                mas[i] = null;
+                if (mas[i + 1] != null) {
+                    mas[i] = mas[i + 1];
+                }
+                break;
+            case "--double-prev":
+                mas[i] = null;
+                if (mas[i - 1] != null) {
+                    mas[i] = mas[i - 1];
+                }
+                break;
+            default:
+            case null:
+                break;
+        }
+    }
+    return mas.filter((element) => element != null)
 }

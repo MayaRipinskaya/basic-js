@@ -1,5 +1,6 @@
 import { NotImplementedError } from '../extensions/index.js';
 
+
 /**
  * Given matrix where you have to find cats by ears "^^"
  *
@@ -14,7 +15,14 @@ import { NotImplementedError } from '../extensions/index.js';
  * ]) => 3`
  *
  */
-export default function countCats(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function countCats(backyard) {
+    // throw new NotImplementedError('Not implemented');
+    let count = 0
+    let deep = backyard.flat()
+    for (let i = 0; i < deep.length; i++) {
+        if (deep[i] === '^^') {
+            count++
+        }
+    }
+    return count
 }

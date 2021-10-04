@@ -13,8 +13,15 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default class DepthCalculator {
-  calculateDepth(/* arr */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+    calculateDepth(arr) {
+        let count = 1,
+            maxcount = 0;
+        for (let i = 0, length = arr.length; i < length; i++) {
+            if (Array.isArray(arr[i])) {
+                let depth = this.calculateDepth(arr[i]);
+                if (depth > maxcount) maxcount = depth;
+            }
+        }
+        return count + maxcount;
+    }
 }
